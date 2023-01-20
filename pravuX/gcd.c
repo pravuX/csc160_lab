@@ -1,3 +1,4 @@
+// Euclidean Algorithm to find the GCD of two numbers.
 #include <stdio.h>
 
 int gcd(int a, int b) {
