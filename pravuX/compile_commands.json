@@ -1,0 +1,11 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "extended_gcd.cpp"
+    ],
+    "directory": "/home/prabesh/Programming/csc160_lab/pravuX",
+    "file": "/home/prabesh/Programming/csc160_lab/pravuX/extended_gcd.cpp"
+  }
+]
