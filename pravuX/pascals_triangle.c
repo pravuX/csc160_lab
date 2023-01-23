@@ -13,7 +13,7 @@
 #include <stdio.h>
 
 int factorial(int n) {
-    long int f;
+    int f;
     int i;
     f = 1;
     i = 1;
