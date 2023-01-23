@@ -39,8 +39,30 @@ int main() {
             printf("  ");
         }
         for (j = 0; j <= i; j++) {
-            printf("%d   ", c(i, j));
+            printf("%-4d", c(i, j));
         }
         putchar('\n');
     }
 }
+/*
+   by introducing a net int variable c representing the coefficent
+   the above for loop can be written as follows
+
+   it uses the pascal's identity that states that
+   nCr = (n-1)Cr * n / n-r
+
+for(i=0; i<n; i++) {
+    for(j=1; j <= n-i; j++)
+        printf("  ");
+
+    for(j=0; j <= i; j++) {
+        if (j==0 || i==0)
+            coef = 1;
+        else
+            coef = coef*(i-j+1)/j;
+
+        printf("%-4d", coef);
+    }
+    printf("\n");
+}
+*/
