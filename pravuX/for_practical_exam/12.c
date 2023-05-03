@@ -1,59 +1,86 @@
 #include <stdio.h>
-/*
- * Miller Rabin Primality Testing.
- * - for a given odd number n > 1, determines if it is composite
- *   or probably prime.
- * - it is a probabilistic primality test
- */
+#include <stdlib.h>
+#include <time.h>
 
-long power(int a, int b) {
-  int i = 0;
-  long res = 1;
-  for (i = 0; i < b; i++) {
-    res *= a;
-  }
-  return res;
+/* Computes (a * b) % mod */
+long long int mulmod(long long int a, long long int b, long long int mod)
+{
+    long long int res = 0;
+    a %= mod;
+    while (b)
+    {
+        if (b & 1)
+            res = (res + a) % mod;
+        a = (a * 2) % mod;
+        b >>= 1;
+    }
+    return res;
 }
 
-void find_k_m(int *k, int *m, int n) {
-  int i = 0;
-  n -= 1;
-  // to solve n-1 = 2^k * m
-  // keep dividing n-1 by 2 untill it becomes odd
-  // count the number of times it was divided by 2 = k
-  // final value of n that is odd = m
-  while (n % 2 == 0) {
-    i += 1;
-    n /= 2;
-  }
-  *k = i;
-  *m = n;
+/* Computes (a ^ b) % mod */
+long long int powmod(long long int a, long long int b, long long int mod)
+{
+    long long int res = 1;
+    a %= mod;
+    while (b)
+    {
+        if (b & 1)
+            res = mulmod(res, a, mod);
+        a = mulmod(a, a, mod);
+        b >>= 1;
+    }
+    return res;
 }
 
-int main() {
-  int n, k, m, i, a;
-  long x;
-  n = 9;
-  a = 2; // chose a base that is between 1 and n-1
-  find_k_m(&k, &m, n); // determine k and m
-  x = power(a, m) % n; // find x = a^ m mod n
+/* Miller-Rabin primality test */
+char* miller_rabin(long long int n, int k)
+{
+    if (n < 2)
+        return "composite";
+    if (n == 2 || n == 3)
+        return "probably prime";
 
-  if (x == 1 || x == n - 1) {
-    printf("PRIME (PROBABLY)");
+    int s = 0;
+    long long int d = n - 1;
+    while (d % 2 == 0)
+    {
+        s++;
+        d /= 2;
+    }
+
+    for (int i = 0; i < k; i++)
+    {
+        long long int a = (rand() % (n - 3)) + 2;
+        long long int x = powmod(a, d, n);
+        if (x == 1 || x == n - 1)
+            continue;
+        for (int j = 0; j < s - 1; j++)
+        {
+            x = mulmod(x, x, n);
+            if (x == 1)
+                return "composite";
+            if (x == n - 1)
+                break;
+        }
+        if (x != n - 1)
+            return "composite";
+    }
+    return "probably prime";
+}
+
+int main()
+{
+    srand(time(NULL));
+
+    long long int n;
+    int k;
+    printf("Enter an odd integer greater than 2: ");
+    scanf("%lld", &n);
+    printf("Enter the number of rounds of testing to perform: ");
+    scanf("%d", &k);
+
+    char* result = miller_rabin(n, k);
+    printf("%lld is %s.\n", n, result);
+
     return 0;
-  }
-
-  // repeat k-1 times
-  for (i = 0; i < k - 1; i++) {
-    x = power(x, 2) % m;
-    if (x == n - 1) {
-      printf("PRIME (PROBABLY)");
-      return 0;
-    }
-    if (x == 1) {
-      printf("COMPOSITE");
-      return 0;
-    }
-  }
-  return 0;
 }
