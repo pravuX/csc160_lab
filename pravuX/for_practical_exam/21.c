@@ -34,6 +34,6 @@ int main() {
       n_vowels++;
   }
   n_of_odd_positions = len % 2 == 0 ? len / 2 : len / 2 + 1;
-  printf("The number of permutations of the letter of %s such that the vowels always occur in odd places is %ld.", word, nPk(n_of_odd_positions, n_vowels) * factorial(len-n_vowels));
+  printf("The number of permutations of the letter of %s such that\n the vowels always occur in odd places is %ld.", word, nPk(n_of_odd_positions, n_vowels) * factorial(len-n_vowels));
   return 0;
 }

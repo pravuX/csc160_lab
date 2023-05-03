@@ -28,31 +28,31 @@ int main() {
   puts("The sets are");
   printf("A = {");
   for (i = 0; i < 5; i++) {
-    printf("(%.2f, %.2f), ", set_A[i].element, set_A[i].membership);
+    printf("(%.0f, %.2f), ", set_A[i].element, set_A[i].membership);
   }
   printf("\b\b}");
 
   printf("\nA = {");
   for (i = 0; i < 5; i++) {
-    printf("(%.2f, %.2f), ", set_B[i].element, set_B[i].membership);
+    printf("(%.0f, %.2f), ", set_B[i].element, set_B[i].membership);
   }
   printf("\b\b}\n");
 
   printf("A ∩ B = {");
   for (i = 0; i < 5; i++) {
-    printf("(%.2f, %.2f), ", set_A[i].element, min(set_A[i].membership, set_B[i].membership));
+    printf("(%.0f, %.2f), ", set_A[i].element, min(set_A[i].membership, set_B[i].membership));
   }
   printf("\b\b}\n");
 
   printf("A ∪ B = {");
   for (i = 0; i < 5; i++) {
-    printf("(%.2f, %.2f), ", set_A[i].element, max(set_A[i].membership, set_B[i].membership));
+    printf("(%.0f, %.2f), ", set_A[i].element, max(set_A[i].membership, set_B[i].membership));
   }
   printf("\b\b}\n");
 
   printf("A' = {");
   for (i = 0; i < 5; i++) {
-    printf("(%.2f, %.2f), ", set_A[i].element, comp(set_A[i].membership));
+    printf("(%.0f, %.2f), ", set_A[i].element, comp(set_A[i].membership));
   }
   printf("\b\b}\n");
 
