@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-// To find the multiplicative inverse of a number 'b' in the set 'Zn'
+// To find the multiplicative and additive inverse of a number 'b' in the set 'Zn'
 void inverse(int b, int n, int *result_arr) {
     int r, r1, r2, t, t1, t2, i1, i2, q;
     // initilaize all variables
@@ -18,9 +18,10 @@ void inverse(int b, int n, int *result_arr) {
         t = t1 - q * t2;
         t1 = t2, t2 = t;
     }
-    if (r1 == 1) {// multiplicative inverse exists
+    if (r1 == 1) {// inverses exists
         // multiplicative inverse is t1 mod n
         i1 = t1 < 0 ? n + t1 : t1 % n;
+        // additive inverse
         i2 = (-r1 * b) % n;
     }
     result_arr[0] = i1;
