@@ -1,28 +1,17 @@
 #include <stdio.h>
 
-int factorial(int n) {
-  if (n==0)
-    return 1;
-  return n * factorial(n-1);
-}
-
-// nCr
-int c(int n, int r) {
-    return factorial(n) / (factorial(n-r) * factorial(r));
+int fact(int n) {
+  if (n == 1)
+    return n;
+  return n * fact(n - 1);
 }
 
 int main() {
-    int n, i , j;
-    puts("Enter the number of rows to print:");
-    scanf("%d", &n);
-    for (i = 0; i < n; i++) {
-        // print spaces in front of the triangle
-        for (j = n - i; j > 0; j--) {
-            printf("  ");
-        }
-        for (j = 0; j <= i; j++) {
-            printf("%-4d", c(i, j));
-        }
-        putchar('\n');
-    }
+  int len;
+  char word[30];
+  printf("Enter the word: ");
+  scanf("%s", word);
+  for (len = 0; word[len] != '\0'; len++);
+  printf("%d words can be from \"%s\" with or without meaning.", fact(len), word);
+  return 0;
 }
