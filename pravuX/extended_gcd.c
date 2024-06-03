@@ -18,10 +18,12 @@ int inverse(int b, int n) {
         t = t1 - q * t2;
         t1 = t2, t2 = t;
     }
-    if (r1 == 1) // inverse exists
+    if (r1 == 1) {// inverse exists
         // inverse is t1 mod n
         i = t1 < 0 ? n + t1 : t1 % n;
-    return i;
+      return i;
+    }
+    return -1;
 }
 
 int main() {
@@ -31,6 +33,9 @@ int main() {
     printf("Enter value b to find multiplicate inverse in Z%d\n", n);
     scanf("%d", &b);
     i = inverse(b, n);
-    printf("The inverse of %d in Z%d is %d.", b, n, i);
+    if (i != -1)
+      printf("The inverse of %d in Z%d is %d.", b, n, i);
+    else
+      printf("The inverse does not exist.");
     return 0;
 }
